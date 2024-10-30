@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legg til</title>
+    <link rel="stylesheet" href="css/add.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Velkommen</h1>
+
+        <h3>Legg til element</h3>
+        <div>
+            <input type="radio" name="category" id="category-movie">
+            <label>Film</label>
+        
+            <input type="radio" name="category" id="category-series">
+            <label>Serie</label>
+        
+            <input type="radio" name="category" id="category-book">
+            <label>Bok</label>
+        </div>
+        <div>
+            <label>Tittel:</label><br>
+            <input id="title" type="text">
+        </div>
+        <div>
+            <label>Sjanger:</label><br>
+            <input id="genre" type="text">
+        </div>
+        <div>
+            <label>År:</label><br>
+            <input id="year" type="text">
+        </div>
+        <div>
+            <label>Regissør:</label><br>
+            <input id="director" type="text">
+        </div>
+        <div>
+            <label>Vurdering:</label><br>
+            <input id="rating" type="text">
+        </div>
+        <div>
+            <label>Beskrivelse:</label><br>
+            <input id="description" type="text">
+        </div>
+        <div class="signUpBox">
+            <button id="btnCreate" onclick="addItem()">Legg til</button>
+        </div>
+    </main>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
