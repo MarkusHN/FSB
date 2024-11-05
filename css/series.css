@@ -1,24 +1,11 @@
-.movie-container a, .series-container a, .book-container a{
-    text-decoration: none;
-    color: var(--fsb-text-color);
-    display: block;
-    margin-bottom: 20px;
-}
-
-.movie-container, .series-container, .book-container{
-    margin-top: 10%;
-    margin-left: 5%;
-    display: flex;
-    flex-direction: column;
-}
-
-.movies, .series, .books{
+.series{
     display: flex;
     justify-content: space-between;
 }
 
 .collection-container {
     display: flex;
+    flex-wrap: wrap; /* Wrap the items to the next line */
     gap: 20px; /* Space between the items */
 }
 
@@ -28,15 +15,11 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex: 1 1 calc(20% - 20px); /* Adjust the width of the items */
+    flex: 1 1 calc(20% - 40px); /* Adjust the width of the items */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 10px; /* Adjust the gap between the contents */
-}
-
-.page-content i{
-    margin-left: 5px;
 }
 
 .collection-item img {
@@ -46,4 +29,12 @@
     margin: 0 auto;
     object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
     border-radius: 8px; /* Optional: to match the border radius of the container */
+}
+
+h1{
+    color: var(--fsb-text-color);
+    font-size: 2rem;
+    margin: 2.5rem;
+    text-align: center;
+    margin-top: 5%;
 }
