@@ -47,3 +47,8 @@
     object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
     border-radius: 8px; /* Optional: to match the border radius of the container */
 }
+
+.page-content a {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
