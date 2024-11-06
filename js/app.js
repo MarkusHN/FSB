@@ -14,15 +14,20 @@ let docid = "";
 
 function addItem() {
     const title = document.getElementById("title").value.trim();
-    const genre = document.getElementById("genre").value.trim();
     const year = document.getElementById("year").value.trim();
     const director = document.getElementById("director").value.trim();
     const rating = document.getElementById("rating").value.trim();
     const description = document.getElementById("description").value.trim();
     const image = document.getElementById("image").value.trim();
 
+    // Collect selected genres
+    const genres = [];
+    document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
+        genres.push(checkbox.value);
+    });
+
     // Validation check
-    if (!title || !genre || !year || !director || !rating || !description || !image) {
+    if (!title || genres.length === 0 || !year || !director || !rating || !description || !image) {
         alert("Please fill in all fields before submitting.");
         return;
     }
@@ -43,7 +48,7 @@ function addItem() {
     // Add the item to the corresponding collection in Firestore
     db.collection(category).doc(title).set({
         title: title,
-        genre: genre,
+        genre: genres,
         year: year,
         director: director,
         rating: rating,
@@ -59,12 +64,14 @@ function addItem() {
 
     // Clear input fields
     document.getElementById("title").value = ""; 
-    document.getElementById("genre").value = ""; 
     document.getElementById("year").value = ""; 
     document.getElementById("director").value = ""; 
     document.getElementById("rating").value = ""; 
     document.getElementById("description").value = "";
     document.getElementById("image").value = "";
+    document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
+        checkbox.checked = false;
+    });
 }
 
 function displayCollection(collectionName, elementId, limit = null) {
