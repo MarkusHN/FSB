@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FicLi</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input id="fname" type="text" name="txt" placeholder="First name" required="">
+                <input id="lname" type="text" name="txt" placeholder="Last name" required="">
+                <input id="email" type="email" name="email" placeholder="Email" required="">
+                <input id="password" type="password" name="pswd" placeholder="Password" required="">
+                <button id="signinbtn" onclick="signUp()">Sign up</button>
+        </div>
+
+        <div class="login">
+                <label for="chk" aria-hidden="true">Login</label>
+                <input id="login-email" type="email" name="email" placeholder="Email" required="">
+                <input id="login-password" type="password" name="pswd" placeholder="Password" required="">
+                <button id="loginbtn" onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
+
+    <script src="js/register.js"></script>
+</body>
+
+</html>

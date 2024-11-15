@@ -20,6 +20,7 @@ body{
     background-repeat: no-repeat;
     height: 100vh;
     box-sizing: border-box;
+    transition: background-color 0.5s;
 }
 
 .nav-links{
@@ -29,20 +30,21 @@ body{
     justify-content: end;
     gap: 2rem;
     font-size: 1.3rem;
+    cursor: pointer;
 }
 
 .nav-links .nav-link:first-child{
     margin-right: auto;
 }
 
-.home-icon, .movie-icon, .series-icon, .book-icon, .add-icon{
+.home-icon, .movie-icon, .series-icon, .book-icon, .add-icon, .user-icon{
     position: relative;
     top: 0.3rem;
     right: 5px;
     padding: 5px;
 }
 
-.nav-container a{
+.nav-container a, .menu{
     text-decoration: none;
     color: var(--fsb-text-color);
     padding: 0.5rem;
@@ -56,7 +58,7 @@ body{
     position: relative;
 }
 
-.nav-container a:hover{
+.nav-container a:hover, .menu:hover{
     background-color: white;
     border-radius: 2rem;
     color: black;
@@ -66,4 +68,43 @@ body{
     background-color: white;
     border-radius: 2rem;
     color: black;
+}
+
+.sidenav {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: var(--fsb-navbar-color);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: var(--fsb-text-color);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: var(--fsb-secondary-color);
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 36px;
+}
+
+#logout {
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
 }

@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/bc16e7c69c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add,book_2,home,live_tv,person" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=book_2" />
 </head>
 
 <body>
@@ -35,12 +33,18 @@
                         <a href="book.html"><span
                                 class="material-symbols-outlined book-icon">book_2</span><span>Bøker</span></a>
                     </li>
-                    <li class="nav-link active">
-                        <a href="add.html"><span class="material-symbols-outlined add-icon">add</span><span>Legg
-                                til</span></a>
+                    <li class="nav-link">
+                        <span class="menu" onclick="openNav()"><span
+                                class="material-symbols-outlined add-icon">person</span><span>Profil</span></span>
                     </li>
                 </ul>
             </nav>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="add.html"><span class="material-symbols-outlined add-icon">add</span><span>Legg til</span></a>
+            <a href="" onclick="logout()">Logg ut</a>
         </div>
         <div class="page-content">
             <h1>Velkommen</h1>
@@ -137,7 +141,7 @@
             </div>
             <div>
                 <label>Vurdering:</label><br>
-                <input id="rating" type="text" placeholder="IMDb vurdering">
+                <input id="rating" type="text" placeholder="">
             </div>
             <div>
                 <label>Beskrivelse:</label><br>
@@ -155,6 +159,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
 
     <script src="js/app.js"></script>
+    <script src="js/side.js"></script>
+    <script src="js/logout.js"></script>
 </body>
 
 </html>
