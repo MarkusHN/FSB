@@ -45,7 +45,6 @@ function showFeaturesForUser(uid) {
 
     if (allowedUIDs.includes(uid)) {
         specialFeatureElement.style.display = "block";
-        enableEditAndDelete();
     } else {
         specialFeatureElement.style.display = "none";
     }
@@ -138,7 +137,8 @@ function displayCollection(collectionName, elementId, limit = null) {
                 <p class="rating">Rating: ${data.rating}</p>
                 <p class="description">Description: ${data.description}</p>
                 <img src="${data.image}" alt="${data.title}">
-                <button onclick="openPopover('${collectionName}', '${doc.id}')">Edit</button>
+                <button class="edit-button" onclick="openPopover('${collectionName}', '${doc.id}')">Edit</button>
+                <button class="delete-button" onclick="deleteItem('${collectionName}', '${doc.id}')">Delete</button>
             `;
             container.appendChild(item);
         });
@@ -153,13 +153,9 @@ function openPopover(collectionName, docId) {
     console.log(collectionName, docId);
     popover.setAttribute('data-collection', collectionName);
     popover.setAttribute('data-id', docId);
-    let category = document.getElementsByName("category");
-    for (let i = 0; i < category.length; i++) {
-        if (category[i].checked) {
-            collectionName = category[i].value;
-        }
-
-    }
+    let genre = document.getElementsByName("genre");
+    // Går igjennom hver kategori og sjekker om den finnes i databasen
+    
     db.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // Sjekker om doc-iden er den samme for den brukaren me skal redigere 
@@ -175,26 +171,20 @@ function openPopover(collectionName, docId) {
                 }
                 document.getElementById("image").value = doc.data().image;
                 document.getElementById("title").value = doc.data().title;
-                document.getElementById("genre-action").value = doc.data().genre;
-                document.getElementById("genre-drama").value = doc.data().genre;
-                document.getElementById("genre-comedy").value = doc.data().genre;
-                document.getElementById("genre-horror").value = doc.data().genre;
-                document.getElementById("genre-romance").value = doc.data().genre;
-                document.getElementById("genre-fantasy").value = doc.data().genre;
-                document.getElementById("genre-adventure").value = doc.data().genre;
-                document.getElementById("genre-thriller").value = doc.data().genre;
-                document.getElementById("genre-sci-fi").value = doc.data().genre;
-                document.getElementById("genre-historical").value = doc.data().genre;
-                document.getElementById("genre-mystery").value = doc.data().genre;
-                document.getElementById("genre-biography").value = doc.data().genre;
-                document.getElementById("genre-dystopian").value = doc.data().genre;
-                document.getElementById("genre-young-adult").value = doc.data().genre;
+                for (let i=0; i < genre.length ; i++) {
+                    console.log(genre[i].value);
+                    for (let j=0; j<doc.data().genre.length;j++) {
+                        if (genre[i].value == doc.data().genre[j]) {
+                            console.log(genre[i].value); 
+                            genre[i].checked = true; 
+                        }
+                    }
+                }
                 document.getElementById("year").value = doc.data().year;
                 document.getElementById("director").value = doc.data().director;
                 document.getElementById("rating").value = doc.data().rating;
                 document.getElementById("description").value = doc.data().description;
             }
-
         });
     })
 }
@@ -202,4 +192,45 @@ function openPopover(collectionName, docId) {
 function closePopover() {
     const popover = document.getElementById('popover');
     popover.style.display = 'none';
+}
+
+function updateItem() {
+    const popover = document.getElementById('popover');
+    const collectionName = popover.getAttribute('data-collection');
+    const docId = popover.getAttribute('data-id');
+
+    const updatedData = {
+        image: document.getElementById("image").value.trim(),
+        title: document.getElementById("title").value.trim(),
+        genre: Array.from(document.querySelectorAll('input[name="genre"]:checked')).map(checkbox => checkbox.value),
+        year: document.getElementById("year").value.trim(),
+        director: document.getElementById("director").value.trim(),
+        rating: document.getElementById("rating").value.trim(),
+        description: document.getElementById("description").value.trim()
+    };
+    
+    db.collection(collectionName).doc(docId).update(updatedData)
+    .then(() => {
+        console.log("Document successfully updated!");
+        displayCollection(collectionName, `index-${collectionName}-list`);
+        closePopover();
+        window.location.reload();
+    })
+    .catch((error) => {
+        console.error("Error updating document: ", error);
+    });
+}
+
+function deleteItem(collectionName, docId) {
+    if (confirm("Er du sikker på at du vil slette dette innholdet?")) {
+        db.collection(collectionName).doc(docId).delete()
+        .then(() => {
+            console.log("Document successfully deleted!");
+            displayCollection(collectionName, `index-${collectionName}-list`);
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.error("Error deleting document: ", error);
+        });
+    }
 }
