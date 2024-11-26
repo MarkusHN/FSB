@@ -16,8 +16,27 @@ let docid = "";
 auth.onAuthStateChanged((user) => {
     if (user) {
         console.log("User is logged in:", user.email);
+
+        db.collection("users").doc(user.uid).get().then((doc) => {
+            if (doc.exists) {
+                const userData = doc.data();
+                const role = userData.role;
+
+                console.log('User role:', role);
+                if (role === "admin" || role === "editor") {
+                    console.log("User has write permissions.");
+                } else {
+                    console.log("User has read-only permissions.");
+                }
+                showFeaturesBasedOnRole(role);
+            } else {
+                console.log("No user document found!");
+            }
+        }).catch((error) => {
+            console.log("Error getting user role:", error);
+        });
+
         displayUserInfo(user.uid);
-        showFeaturesForUser(user.uid);
     } else {
         window.location.href = "login.html";
     }
@@ -37,16 +56,18 @@ function displayUserInfo(userId) {
     });
 }
 
-function showFeaturesForUser(uid) {
-    const specialFeatureElement = document.getElementById("special-feature");
+function showFeaturesBasedOnRole(role) {
+    const editButtons = document.querySelectorAll(".edit-button");
+    const deleteButtons = document.querySelectorAll(".delete-button");
 
-    // List of UIDs that have access to the special feature
-    const allowedUIDs = ["uYTPDko9CkYqIfO7GNaxSaNwnS72", "UID2", "UID3"]; // Replace with actual UIDs
-
-    if (allowedUIDs.includes(uid)) {
-        specialFeatureElement.style.display = "block";
+    if (role === "admin") {
+        editButtons.forEach((btn) => btn.style.display = "inline-block");
+        deleteButtons.forEach((btn) => btn.style.display = "inline-block");
+        document.getElementById("special-feature").style.display = "block";
     } else {
-        specialFeatureElement.style.display = "none";
+        editButtons.forEach((btn) => btn.style.display = "none");
+        deleteButtons.forEach((btn) => btn.style.display = "none");
+        document.getElementById("special-feature").style.display = "none";
     }
 }
 
@@ -222,15 +243,24 @@ function updateItem() {
 }
 
 function deleteItem(collectionName, docId) {
-    if (confirm("Er du sikker på at du vil slette dette innholdet?")) {
-        db.collection(collectionName).doc(docId).delete()
-        .then(() => {
-            console.log("Document successfully deleted!");
-            displayCollection(collectionName, `index-${collectionName}-list`);
-            window.location.reload();
+    db.collection("users").doc(auth.currentUser.uid).get()
+        .then((doc) => {
+            if (doc.exists && (doc.data().role === "admin" || doc.data().role === "editor")) {
+                if (confirm("Er du sikker på at du vil slette dette inholdet?")) {
+                    db.collection(collectionName).doc(docId).delete()
+                        .then(() => {
+                            console.log("Document successfully deleted!");
+                            window.location.reload();
+                        })
+                        .catch((error) => {
+                            console.error("Error deleting document:", error);
+                        });
+                }
+            } else {
+                alert("Du har ikkje tilgang til å slette innhold.");
+            }
         })
         .catch((error) => {
-            console.error("Error deleting document: ", error);
+            console.error("Error fetching user role:", error);
         });
-    }
 }

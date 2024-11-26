@@ -13,34 +13,34 @@
   </head>
   <body>
     <main>
-      <div class="nav-container">
-        <nav class="navbar">
-            <ul class="nav-links">
-                <li class="nav-link">
-                    <a href="index.html"><span class="material-icons home-icon">home</span><span>Heim</span></a>
-                </li>
-                <li class="nav-link active">
-                    <a href="movie.html"><span class="material-icons movie-icon">movie</span><span>Filmer</span></a>
-                </li>
-                <li class="nav-link">
-                    <a href="series.html"><span class="material-icons series-icon">live_tv</span><span>Serier</span></a>
-                </li>
-                <li class="nav-link">
-                    <a href="book.html"><span
-                            class="material-symbols-outlined book-icon">book_2</span><span>Bøker</span></a>
-                </li>
-                <li class="nav-link">
-                    <span class="menu" onclick="openNav()"><span class="material-symbols-outlined add-icon">person</span><span>Profil</span></span>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="add.html"><span class="material-symbols-outlined add-icon">add</span><span>Legg til</span></a>
-        <a href="" onclick="logout()">Logg ut</a>
-    </div>
+        <div class="nav-container">
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li class="nav-link">
+                        <a href="index.html"><span class="material-icons home-icon">home</span><span>Heim</span></a>
+                    </li>
+                    <li class="nav-link active">
+                        <a href="movie.html"><span class="material-icons movie-icon">movie</span><span>Filmer</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="series.html"><span class="material-icons series-icon">live_tv</span><span>Serier</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="book.html"><span
+                                class="material-symbols-outlined book-icon">book_2</span><span>Bøker</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <span class="menu" onclick="openNav()"><span class="material-symbols-outlined add-icon">person</span><span>Profil</span></span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    
+        <div id="Sidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="add.html"><span class="material-symbols-outlined add-icon">add</span><span>Legg til</span></a>
+            <a id="logout" onclick="logout()">Logg ut</a>
+        </div>
 
       <h1>Filmer</h1>
       <div class="movies">
@@ -157,6 +157,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth-compat.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/side.js"></script>
