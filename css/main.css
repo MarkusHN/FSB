@@ -37,7 +37,7 @@ body{
     margin-right: auto;
 }
 
-.home-icon, .movie-icon, .series-icon, .book-icon, .add-icon, .user-icon{
+.home-icon, .movie-icon, .series-icon, .book-icon, .menu-icon, .user-icon{
     position: relative;
     top: 0.3rem;
     right: 5px;
@@ -107,6 +107,7 @@ body{
     left: 0;
     bottom: 0;
     cursor: pointer;
+    margin: 75vh 0 0 4vw;
 }
 
 .edit-button, .delete-button {
@@ -155,5 +156,75 @@ body{
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 20%;
+}
+
+.popover-content button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: white;
+    background-size: 200% auto;
+    transition: background-position 0.5s;
+}
+
+.popover-content .btnUpdate {
+    background-image: linear-gradient(to right, #4CAF50, #45a049); /* Green gradient */
+}
+
+.popover-content .btnUpdate:hover {
+    background-position: right center; /* Change the position of the gradient on hover */
+}
+
+.popover-content .btnClose {
+    background-image: linear-gradient(to right, #f44336, #da190b); /* Red gradient */
+}
+
+.popover-content .btnClose:hover {
+    background-position: right center; /* Change the position of the gradient on hover */
+}
+
+.popover-content .genre-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.popover-content .genre-box div {
+    flex: 1 1 45%; /* Two items per row */
+}
+
+.popover-content input[type="text"],
+.popover-content input[type="checkbox"],
+.popover-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    
+}
+
+.popover-content input[type="radio"], .popover-content label {
+    margin: 2rem 0 2rem 0;
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.popover-content div {
+    margin: 1rem 0 1rem 0;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.popover-content textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Minimum height for the textarea */
 }

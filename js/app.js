@@ -171,15 +171,14 @@ function displayCollection(collectionName, elementId, limit = null) {
 function openPopover(collectionName, docId) {
     const popover = document.getElementById('popover');
     popover.style.display = 'block';
+    document.body.classList.add('no-scroll'); // Add class to lock background
     console.log(collectionName, docId);
     popover.setAttribute('data-collection', collectionName);
     popover.setAttribute('data-id', docId);
     let genre = document.getElementsByName("genre");
-    // Går igjennom hver kategori og sjekker om den finnes i databasen
-    
+
     db.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            // Sjekker om doc-iden er den samme for den brukaren me skal redigere 
             if (docId == doc.id) {
                 if (collectionName == "movies") {
                     document.getElementById("category-movie").checked = true;
@@ -192,12 +191,10 @@ function openPopover(collectionName, docId) {
                 }
                 document.getElementById("image").value = doc.data().image;
                 document.getElementById("title").value = doc.data().title;
-                for (let i=0; i < genre.length ; i++) {
-                    console.log(genre[i].value);
-                    for (let j=0; j<doc.data().genre.length;j++) {
+                for (let i = 0; i < genre.length; i++) {
+                    for (let j = 0; j < doc.data().genre.length; j++) {
                         if (genre[i].value == doc.data().genre[j]) {
-                            console.log(genre[i].value); 
-                            genre[i].checked = true; 
+                            genre[i].checked = true;
                         }
                     }
                 }
@@ -207,13 +204,20 @@ function openPopover(collectionName, docId) {
                 document.getElementById("description").value = doc.data().description;
             }
         });
-    })
+    });
 }
 
 function closePopover() {
     const popover = document.getElementById('popover');
     popover.style.display = 'none';
+    document.body.classList.remove('no-scroll'); // Remove class to unlock background
 }
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closePopover();
+    }
+});
 
 function updateItem() {
     const popover = document.getElementById('popover');
