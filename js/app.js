@@ -276,10 +276,12 @@ function openProfileModal() {
     document.getElementById('profile-modal').style.display = 'flex';
 }
 
-function closeProfileModal() {
-    document.getElementById('profile-modal').style.display = 'none';
+function openAddModal(){
+    closeProfileModal();
+    const addContent = document.getElementById('add-modal');
+    addContent.style.display = 'block';
 }
-
+ 
 function updateProfile() {
     const user = firebase.auth().currentUser;
 
@@ -352,6 +354,12 @@ function openProfileModal() {
 // Function to close the modal
 function closeProfileModal() {
     const modal = document.getElementById('profile-modal');
+    modal.style.display = 'none';
+    document.body.classList.remove('no-scroll'); // Re-enable scrolling
+}
+
+function closeAddModal() {
+    const modal = document.getElementById('add-modal');
     modal.style.display = 'none';
     document.body.classList.remove('no-scroll'); // Re-enable scrolling
     window.location.reload(); // Refresh the page

@@ -15,12 +15,10 @@
 }
 
 body{
-    background: black;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: linear-gradient(-45deg, #ff0101, #1100ff, #393939);
+    background-size: 1000% 1000%;
+    animation: gradient 15s ease infinite;
     height: 100vh;
-    box-sizing: border-box;
-    transition: background-color 0.5s;
 }
 
 .nav-links{
@@ -31,6 +29,8 @@ body{
     gap: 2rem;
     font-size: 1.3rem;
     cursor: pointer;
+    justify-content: baseline;
+    align-items: baseline;
 }
 
 .nav-links .nav-link:first-child{
@@ -52,10 +52,11 @@ body{
 
 .nav-container{
     padding: 2rem;
-    background-color: var(--fsb-navbar-color);
+    background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
     font-weight: 700;
-    outline: 2px solid var(--fsb-main-color);
     position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .nav-container a:hover, .menu:hover{
@@ -241,7 +242,7 @@ body{
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgba(255, 255, 255, 0.5);
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -249,6 +250,8 @@ body{
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: relative;
+    backdrop-filter: blur(10px);
+    text-align: center;
 }
 
 .modal-content button {
@@ -262,6 +265,22 @@ body{
     background-color: #4CAF50;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
+
+.btnProfile {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#logout {
+    background-color: #f44336;
+}
+
+#logout:hover {
+    background-color: #da190b;
+}
+
 
 .modal-content button:hover {
     background-color: #45a049;
@@ -293,4 +312,81 @@ body{
     right: 20px;
     cursor: pointer;
     font-size: 2rem;
+}
+
+.add-modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.add-modal-content input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.add-modal-content label {
+    font-size: 1.2rem;
+    color: black;
+}
+
+.add-modal-content button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: var(--fsb-navbar-color);
+    color: white;
+    cursor: pointer;
+}
+
+.genre-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.genre-box div {
+    flex: 1 1 40%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-modal-content textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Minimum height for the textarea */
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
