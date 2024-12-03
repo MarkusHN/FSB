@@ -47,7 +47,10 @@ function displayUserInfo(userId) {
         if (doc.exists) {
             const userData = doc.data();
             const userName = `${userData.fname} ${userData.lname}`;
+
+            // Update HTML elements with user information
             document.getElementById("user-name").textContent = userName;
+            
         } else {
             console.log("No such document!");
         }
@@ -267,4 +270,89 @@ function deleteItem(collectionName, docId) {
         .catch((error) => {
             console.error("Error fetching user role:", error);
         });
+}
+
+function openProfileModal() {
+    document.getElementById('profile-modal').style.display = 'flex';
+}
+
+function closeProfileModal() {
+    document.getElementById('profile-modal').style.display = 'none';
+}
+
+function updateProfile() {
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+        const userId = user.uid; // Get the user's UID
+
+        // Get updated values from modal inputs
+        const updatedFname = document.getElementById("fname").value;
+        const updatedLname = document.getElementById("lname").value;
+        const updatedEmail = document.getElementById("email").value;
+
+        // Update the user's email in Firebase Authentication
+        user.updateEmail(updatedEmail).then(() => {
+            // Update user's Firestore document
+            db.collection("users").doc(userId).update({
+                fname: updatedFname,
+                lname: updatedLname,
+                email: updatedEmail
+            })
+            .then(() => {
+                alert("Profilen din er oppdatert!");
+            })
+            .catch((error) => {
+                console.error("Feil ved oppdatering av brukerdata i Firestore:", error);
+                alert("Kunne ikke oppdatere brukerinformasjon i Firestore.");
+            });
+        }).catch((error) => {
+            console.error("Feil ved oppdatering av e-post:", error);
+            alert("Kunne ikke oppdatere e-posten din. Prøv igjen.");
+        });
+    } else {
+        console.error("Ingen autentisert bruker funnet.");
+        alert("Du må logge inn for å oppdatere profilen din.");
+    }
+}
+function openProfileModal() {
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+        const userId = user.uid; // Get the user's UID
+        const modal = document.getElementById('profile-modal');
+
+        // Open the modal
+        modal.style.display = 'block';
+        document.body.classList.add('no-scroll'); // Prevent scrolling
+
+        // Fetch user information from Firestore
+        db.collection("users").doc(userId).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    // Populate the modal fields with user data
+                    document.getElementById("fname").value = doc.data().fname || "";
+                    document.getElementById("lname").value = doc.data().lname || "";
+                    document.getElementById("email").value = doc.data().email || "";
+                } else {
+                    console.error("No such document!");
+                    alert("Brukerinformasjon ikke funnet.");
+                }
+            })
+            .catch((error) => {
+                console.error("Feil ved henting av brukerdata:", error);
+                alert("Kunne ikke hente brukerinformasjon.");
+            });
+    } else {
+        console.error("Ingen autentisert bruker funnet.");
+        alert("Du må logge inn for å vise profilen din.");
+    }
+}
+
+// Function to close the modal
+function closeProfileModal() {
+    const modal = document.getElementById('profile-modal');
+    modal.style.display = 'none';
+    document.body.classList.remove('no-scroll'); // Re-enable scrolling
+    window.location.reload(); // Refresh the page
 }

@@ -34,14 +34,19 @@
                 <li class="nav-link">
                     <span class="menu" onclick="openNav()"><span class="material-symbols-outlined menu-icon">menu</span><span>Meir</span></span>
                 </li>
+                <li class="nav-link">
+                    <a onclick="openProfileModal()">Min Profil</a>
+                </li>
             </ul>
         </nav>
     </div>
 
+    
+
+
     <div id="Sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="add.html"><span class="material-symbols-outlined add-icon">add</span><span>Legg til</span></a>
-        <a href="MyProfile.html">Min Profil (WIP)</a>
         <a id="logout" onclick="logout()">Logg ut</a>
     </div>
 
@@ -52,6 +57,29 @@
             <p>Du kan Slette og redigere innhold.</p>
         </div>
     </div>
+
+    <a onclick="openProfileModal()">Min Profil</a>
+
+<div id="profile-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeProfileModal()">&times;</span>
+        <h2>Min Profil</h2>
+        <div class="profile-info">
+            <label for="fname">Fornavn:</label>
+            <input type="text" id="fname" name="fname" placeholder="Fornavn" />
+            <label for="lname">Etternavn:</label>
+            <input type="text" id="lname" name="lname" placeholder="Etternavn" />
+            <label for="email">E-post:</label>
+            <input type="email" id="email" name="email" placeholder="E-post" />
+        </div>
+        <div class="profile-buttons">
+            <button class="btnUpdate" onclick="updateProfile()">Lagre Endringer</button>
+            <button id="logout" onclick="logout()">Logg ut</button>
+        </div>
+    </div>
+</div>
+
+    
     
     <div class="page-content">
         <div class="movie-container">
@@ -185,6 +213,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-storage-compat.js"></script>
+
 
     <script src="js/app.js"></script>
     <script src="js/side.js"></script>
