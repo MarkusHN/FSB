@@ -75,12 +75,12 @@ function showFeaturesBasedOnRole(role) {
 }
 
 function addItem() {
-    const title = document.getElementById("title").value.trim();
-    const year = document.getElementById("year").value.trim();
-    const director = document.getElementById("director").value.trim();
-    const rating = document.getElementById("rating").value.trim();
-    const description = document.getElementById("description").value.trim();
-    const image = document.getElementById("image").value.trim();
+    const title = document.getElementById("add-title").value.trim();
+    const year = document.getElementById("add-year").value.trim();
+    const director = document.getElementById("add-director").value.trim();
+    const rating = document.getElementById("add-rating").value.trim();
+    const description = document.getElementById("add-description").value.trim();
+    const image = document.getElementById("add-image").value.trim();
 
     // Collect selected genres
     const genres = [];
@@ -96,11 +96,11 @@ function addItem() {
 
     // Determine the selected category
     let category;
-    if (document.getElementById("category-movie").checked) {
+    if (document.getElementById("add-category-movie").checked) {
         category = "movies";
-    } else if (document.getElementById("category-series").checked) {
+    } else if (document.getElementById("add-category-series").checked) {
         category = "series";
-    } else if (document.getElementById("category-book").checked) {
+    } else if (document.getElementById("add-category-book").checked) {
         category = "books";
     } else {
         alert("Please select a category.");
@@ -108,7 +108,7 @@ function addItem() {
     }
 
     // Add the item to the corresponding collection in Firestore
-    db.collection(category).doc(title).set({
+    db.collection(category).doc().set({
         title: title,
         genre: genres,
         year: year,
@@ -125,12 +125,12 @@ function addItem() {
     });
 
     // Clear input fields
-    document.getElementById("title").value = ""; 
-    document.getElementById("year").value = ""; 
-    document.getElementById("director").value = ""; 
-    document.getElementById("rating").value = ""; 
-    document.getElementById("description").value = "";
-    document.getElementById("image").value = "";
+    document.getElementById("add-title").value = ""; 
+    document.getElementById("add-year").value = ""; 
+    document.getElementById("add-director").value = ""; 
+    document.getElementById("add-rating").value = ""; 
+    document.getElementById("add-description").value = "";
+    document.getElementById("add-image").value = "";
     document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
         checkbox.checked = false;
     });
@@ -139,7 +139,7 @@ function addItem() {
 function displayCollection(collectionName, elementId, limit = null) {
     const collectionRef = db.collection(collectionName);
     let query = collectionRef;
-
+    console.log(collectionName);
     if (limit) {
         query = query.limit(limit);
     }
@@ -161,8 +161,8 @@ function displayCollection(collectionName, elementId, limit = null) {
                 <p class="rating">Rating: ${data.rating}</p>
                 <p class="description">Description: ${data.description}</p>
                 <img src="${data.image}" alt="${data.title}">
-                <button class="edit-button" onclick="openPopover('${collectionName}', '${doc.id}')">Edit</button>
-                <button class="delete-button" onclick="deleteItem('${collectionName}', '${doc.id}')">Delete</button>
+                <button class="edit-button" onclick="openPopover(&quot;${collectionName}&quot;, &quot;${doc.id}&quot;)">Edit</button>
+                <button class="delete-button" onclick="deleteItem(&quot;${collectionName}&quot;, &quot;${doc.id}&quot;)">Delete</button>
             `;
             container.appendChild(item);
         });
