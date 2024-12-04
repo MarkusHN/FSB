@@ -174,12 +174,12 @@ function displayCollection(collectionName, elementId, limit = null) {
 function openPopover(collectionName, docId) {
     const popover = document.getElementById('popover');
     popover.style.display = 'block';
-    document.body.classList.add('no-scroll'); // Add class to lock background
+    document.body.classList.add('no-scroll'); // Lås bakgrunnen
     console.log(collectionName, docId);
     popover.setAttribute('data-collection', collectionName);
     popover.setAttribute('data-id', docId);
     let genre = document.getElementsByName("genre");
-
+    
     db.collection(collectionName).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             if (docId == doc.id) {

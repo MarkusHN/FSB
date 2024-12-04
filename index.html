@@ -1,438 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FicLi</title>
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/indexstyle.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <script
-      src="https://kit.fontawesome.com/bc16e7c69c.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add,book_2,home,live_tv,person"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-  </head>
 
-  <body>
-    <div class="nav-container">
-      <nav class="navbar">
-        <ul class="nav-links">
-          <li class="nav-link active">
-            <a href="index.html"
-              ><span class="material-icons home-icon">home</span
-              ><span>Heim</span></a
-            >
-          </li>
-          <li class="nav-link">
-            <a href="movie.html"
-              ><span class="material-icons movie-icon">movie</span
-              ><span>Filmer</span></a
-            >
-          </li>
-          <li class="nav-link">
-            <a href="series.html"
-              ><span class="material-icons series-icon">live_tv</span
-              ><span>Serier</span></a
-            >
-          </li>
-          <li class="nav-link">
-            <a href="book.html"
-              ><span class="material-symbols-outlined book-icon">book_2</span
-              ><span>Bøker</span></a
-            >
-          </li>
-          <li class="nav-link">
-            <a onclick="openProfileModal()" class="profile"><span>Min Profil</span></a>
-          </li>
-        </ul>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FicLi</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/indexstyle.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <script src="https://kit.fontawesome.com/bc16e7c69c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add,book_2,home,live_tv,person" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+
+<body>
+  <div class="nav-container">
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li class="nav-link active">
+          <a href="index.html"><span class="material-icons home-icon">home</span><span>Heim</span></a>
+        </li>
+        <li class="nav-link">
+          <a href="movie.html"><span class="material-icons movie-icon">movie</span><span>Filmer</span></a>
+        </li>
+        <li class="nav-link">
+          <a href="series.html"><span class="material-icons series-icon">live_tv</span><span>Serier</span></a>
+        </li>
+        <li class="nav-link">
+          <a href="book.html"><span class="material-symbols-outlined book-icon">book_2</span><span>Bøker</span></a>
+        </li>
+        <li class="nav-link">
+          <a onclick="openProfileModal()" class="profile"><span>Min Profil</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="user-info">
+    <h2>Velkommen, <span id="user-name"></span>!</h2>
+    <div id="special-feature" style="display: none; color: white">
+      <h3>Du er Administrator</h3>
+      <p>Du kan Slette og redigere innhold.</p>
     </div>
+  </div>
 
-    <div id="user-info">
-      <h2>Velkommen, <span id="user-name"></span>!</h2>
-      <div id="special-feature" style="display: none; color: white">
-        <h3>Du er Administrator</h3>
-        <p>Du kan Slette og redigere innhold.</p>
+  <div id="profile-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeProfileModal()">&times;</span>
+      <h2>Min Profil</h2>
+      <div class="profile-info">
+        <label for="fname">Fornavn:</label>
+        <input type="text" id="fname" name="fname" placeholder="Fornavn" />
+        <label for="lname">Etternavn:</label>
+        <input type="text" id="lname" name="lname" placeholder="Etternavn" />
+        <label for="email">E-post:</label>
+        <input type="email" id="email" name="email" placeholder="E-post" />
+      </div>
+      <div class="btnProfile">
+        <button class="btnUpdate" onclick="updateProfile()">
+          Lagre Endringer
+        </button>
+        <button onclick="openAddModal()">Legg til innhold</button>
+        <button id="logout" onclick="logout()">Logg ut</button>
       </div>
     </div>
+  </div>
 
-    <div id="profile-modal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeProfileModal()">&times;</span>
-        <h2>Min Profil</h2>
-        <div class="profile-info">
-          <label for="fname">Fornavn:</label>
-          <input type="text" id="fname" name="fname" placeholder="Fornavn" />
-          <label for="lname">Etternavn:</label>
-          <input type="text" id="lname" name="lname" placeholder="Etternavn" />
-          <label for="email">E-post:</label>
-          <input type="email" id="email" name="email" placeholder="E-post" />
-        </div>
-        <div class="btnProfile">
-          <button class="btnUpdate" onclick="updateProfile()">
-            Lagre Endringer
-          </button>
-          <button onclick="openAddModal()">Legg til innhold</button>
-          <button id="logout" onclick="logout()">Logg ut</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="add-modal" class="modal">
+  <div id="add-modal" class="modal">
     <div class="add-modal-content">
-        <span class="close" onclick="closeAddModal()">&times;</span>
-        <div>
-            <input type="radio" name="category" id="category-movie">
-            <label>Film</label>
+      <span class="close" onclick="closeAddModal()">&times;</span>
+      <div>
+        <input type="radio" name="category" id="category-movie">
+        <label>Film</label>
 
-            <input type="radio" name="category" id="category-series">
-            <label>Serie</label>
+        <input type="radio" name="category" id="category-series">
+        <label>Serie</label>
 
-            <input type="radio" name="category" id="category-book">
-            <label>Bok</label>
-        </div>
-        <div>
-            <label for="image">Bilde-URL:</label><br>
-            <input id="image" type="text" placeholder="URL til Bilde">
-        </div>
-        <div>
-            <label>Tittel:</label><br>
-            <input id="title" type="text" placeholder="Legg til Tittel">
-        </div>
-        <div>
-            <label>Sjanger:</label><br>
-            <div class="genre-box">
-                <div>
-                    <input type="checkbox" id="genre-action" name="genre" value="Action">
-                    <label for="genre-action">Action</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-drama" name="genre" value="Drama">
-                    <label for="genre-drama">Drama</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-comedy" name="genre" value="Comedy">
-                    <label for="genre-comedy">Comedy</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-horror" name="genre" value="Horror">
-                    <label for="genre-horror">Horror</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-romance" name="genre" value="Romance">
-                    <label for="genre-romance">Romance</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-fantasy" name="genre" value="Fantasy">
-                    <label for="genre-fantasy">Fantasy</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-adventure" name="genre" value="Adventure">
-                    <label for="genre-adventure">Adventure</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-thriller" name="genre" value="Thriller">
-                    <label for="genre-thriller">Thriller</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-sci-fi" name="genre" value="Sci-Fi">
-                    <label for="genre-sci-fi">Sci-Fi</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-historical" name="genre" value="Historical">
-                    <label for="genre-historical">Historical</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-mystery" name="genre" value="Mystery">
-                    <label for="genre-mystery">Mystery</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-biography" name="genre" value="Biography">
-                    <label for="genre-biography">Biography</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-dystopian" name="genre" value="Dystopian">
-                    <label for="genre-dystopian">Dystopian</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="genre-young-adult" name="genre" value="Young Adult">
-                    <label for="genre-young-adult">Young Adult</label>
-                </div>
-
-                <!-- Add more genres as needed -->
-            </div>
-        </div>
-        <div>
-            <label>År:</label><br>
-            <input id="year" type="text" placeholder="Legg til utgivelsesår">
-        </div>
-        <div>
-            <label>Regissør:</label><br>
-            <input id="director" type="text" placeholder="">
-        </div>
-        <div>
-            <label>Vurdering:</label><br>
-            <input id="rating" type="text" placeholder="">
-        </div>
-        <div>
-            <label>Beskrivelse:</label><br>
-            <textarea id="description" placeholder="Legg til beskrivelse"></textarea>
-        </div>
-        <div class="signUpBox">
-            <button id="btnCreate" onclick="addItem()">Legg til</button>
-        </div>
-    </div>
-    </div>
-    </div>
-
-    <div class="page-content">
-      <div class="movie-container">
-        <a href="movie.html"
-          >Filmer<span><i class="fa-solid fa-arrow-right"></i></span
-        ></a>
-        <div class="movies">
-          <div class="collection-container" id="index-movie-list"></div>
-        </div>
+        <input type="radio" name="category" id="category-book">
+        <label>Bok</label>
       </div>
-      <div class="series-container">
-        <a href="series.html"
-          >Serier<span><i class="fa-solid fa-arrow-right"></i></span
-        ></a>
-        <div class="series">
-          <div class="collection-container" id="index-series-list"></div>
-        </div>
+      <div>
+        <label for="image">Bilde-URL:</label><br>
+        <input id="image" type="text" placeholder="URL til Bilde">
       </div>
-      <div class="book-container">
-        <a href="book.html"
-          >Bøker<span><i class="fa-solid fa-arrow-right"></i></span
-        ></a>
-        <div class="books">
-          <div class="collection-container" id="index-book-list"></div>
-        </div>
+      <div>
+        <label>Tittel:</label><br>
+        <input id="title" type="text" placeholder="Legg til Tittel">
       </div>
-    </div>
-
-    <div id="popover" class="popover">
-      <div class="popover-content">
-        <div>
-          <input
-            type="radio"
-            name="category"
-            id="category-movie"
-            value="movies"
-          />
-          <label>Film</label>
-
-          <input
-            type="radio"
-            name="category"
-            id="category-series"
-            value="series"
-          />
-          <label>Serie</label>
-
-          <input
-            type="radio"
-            name="category"
-            id="category-book"
-            value="books"
-          />
-          <label>Bok</label>
-        </div>
-        <div>
-          <label for="image">Bilde-URL:</label><br />
-          <input id="image" type="text" placeholder="URL til Bilde" />
-        </div>
-        <div>
-          <label>Tittel:</label><br />
-          <input id="title" type="text" placeholder="Legg til Tittel" />
-        </div>
-        <div>
-          <label>Sjanger:</label><br />
-          <div class="genre-box">
-            <div>
-              <input
-                type="checkbox"
-                id="genre-action"
-                name="genre"
-                value="Action"
-              />
-              <label for="genre-action">Action</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-drama"
-                name="genre"
-                value="Drama"
-              />
-              <label for="genre-drama">Drama</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-comedy"
-                name="genre"
-                value="Comedy"
-              />
-              <label for="genre-comedy">Comedy</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-horror"
-                name="genre"
-                value="Horror"
-              />
-              <label for="genre-horror">Horror</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-romance"
-                name="genre"
-                value="Romance"
-              />
-              <label for="genre-romance">Romance</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-fantasy"
-                name="genre"
-                value="Fantasy"
-              />
-              <label for="genre-fantasy">Fantasy</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-adventure"
-                name="genre"
-                value="Adventure"
-              />
-              <label for="genre-adventure">Adventure</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-thriller"
-                name="genre"
-                value="Thriller"
-              />
-              <label for="genre-thriller">Thriller</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-sci-fi"
-                name="genre"
-                value="Sci-Fi"
-              />
-              <label for="genre-sci-fi">Sci-Fi</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-historical"
-                name="genre"
-                value="Historical"
-              />
-              <label for="genre-historical">Historical</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-mystery"
-                name="genre"
-                value="Mystery"
-              />
-              <label for="genre-mystery">Mystery</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-biography"
-                name="genre"
-                value="Biography"
-              />
-              <label for="genre-biography">Biography</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-dystopian"
-                name="genre"
-                value="Dystopian"
-              />
-              <label for="genre-dystopian">Dystopian</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="genre-young-adult"
-                name="genre"
-                value="Young Adult"
-              />
-              <label for="genre-young-adult">Young Adult</label>
-            </div>
-
-            <!-- Add more genres as needed -->
+      <div>
+        <label>Sjanger:</label><br>
+        <div class="genre-box">
+          <div>
+            <input type="checkbox" id="genre-action" name="genre" value="Action">
+            <label for="genre-action">Action</label>
           </div>
+          <div>
+            <input type="checkbox" id="genre-drama" name="genre" value="Drama">
+            <label for="genre-drama">Drama</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-comedy" name="genre" value="Comedy">
+            <label for="genre-comedy">Comedy</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-horror" name="genre" value="Horror">
+            <label for="genre-horror">Horror</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-romance" name="genre" value="Romance">
+            <label for="genre-romance">Romance</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-fantasy" name="genre" value="Fantasy">
+            <label for="genre-fantasy">Fantasy</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-adventure" name="genre" value="Adventure">
+            <label for="genre-adventure">Adventure</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-thriller" name="genre" value="Thriller">
+            <label for="genre-thriller">Thriller</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-sci-fi" name="genre" value="Sci-Fi">
+            <label for="genre-sci-fi">Sci-Fi</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-historical" name="genre" value="Historical">
+            <label for="genre-historical">Historical</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-mystery" name="genre" value="Mystery">
+            <label for="genre-mystery">Mystery</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-biography" name="genre" value="Biography">
+            <label for="genre-biography">Biography</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-dystopian" name="genre" value="Dystopian">
+            <label for="genre-dystopian">Dystopian</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-young-adult" name="genre" value="Young Adult">
+            <label for="genre-young-adult">Young Adult</label>
+          </div>
+
+          <!-- Legg til fleire sjangrar om nødvendig -->
         </div>
-        <div>
-          <label>År:</label><br />
-          <input id="year" type="text" placeholder="Legg til utgivelsesår" />
-        </div>
-        <div>
-          <label>Regissør:</label><br />
-          <input id="director" type="text" placeholder="" />
-        </div>
-        <div>
-          <label>Vurdering:</label><br />
-          <input id="rating" type="text" placeholder="" />
-        </div>
-        <div>
-          <label>Beskrivelse:</label><br />
-          <textarea
-            id="description"
-            placeholder="Legg til beskrivelse"
-          ></textarea>
-        </div>
-        <div class="signUpBox">
-          <button class="btnUpdate" onclick="updateItem()">
-            Lagre Endringer
-          </button>
-        </div>
-        <button class="btnClose" onclick="closePopover()">Close</button>
+      </div>
+      <div>
+        <label>År:</label><br>
+        <input id="year" type="text" placeholder="Legg til utgivelsesår">
+      </div>
+      <div>
+        <label>Regissør:</label><br>
+        <input id="director" type="text" placeholder="">
+      </div>
+      <div>
+        <label>Vurdering:</label><br>
+        <input id="rating" type="text" placeholder="">
+      </div>
+      <div>
+        <label>Beskrivelse:</label><br>
+        <textarea id="description" placeholder="Legg til beskrivelse"></textarea>
+      </div>
+      <div class="signUpBox">
+        <button id="btnCreate" onclick="addItem()">Legg til</button>
       </div>
     </div>
+  </div>
+  </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-storage-compat.js"></script>
+  <div class="page-content">
+    <div class="movie-container">
+      <a href="movie.html">Filmer<span><i class="fa-solid fa-arrow-right"></i></span></a>
+      <div class="movies">
+        <div class="collection-container" id="index-movie-list"></div>
+      </div>
+    </div>
+    <div class="series-container">
+      <a href="series.html">Serier<span><i class="fa-solid fa-arrow-right"></i></span></a>
+      <div class="series">
+        <div class="collection-container" id="index-series-list"></div>
+      </div>
+    </div>
+    <div class="book-container">
+      <a href="book.html">Bøker<span><i class="fa-solid fa-arrow-right"></i></span></a>
+      <div class="books">
+        <div class="collection-container" id="index-book-list"></div>
+      </div>
+    </div>
+  </div>
 
-    <script src="js/app.js"></script>
-    <script src="js/side.js"></script>
-    <script src="js/logout.js"></script>
-    <script>
-      displayCollection("movies", "index-movie-list", 6);
-      displayCollection("series", "index-series-list", 6);
-      displayCollection("books", "index-book-list", 6);
-    </script>
-  </body>
+  <div id="popover" class="popover">
+    <div class="popover-content">
+      <div>
+        <input type="radio" name="category" id="category-movie" value="movies" />
+        <label>Film</label>
+
+        <input type="radio" name="category" id="category-series" value="series" />
+        <label>Serie</label>
+
+        <input type="radio" name="category" id="category-book" value="books" />
+        <label>Bok</label>
+      </div>
+      <div>
+        <label for="image">Bilde-URL:</label><br />
+        <input id="image" type="text" placeholder="URL til Bilde" />
+      </div>
+      <div>
+        <label>Tittel:</label><br />
+        <input id="title" type="text" placeholder="Legg til Tittel" />
+      </div>
+      <div>
+        <label>Sjanger:</label><br />
+        <div class="genre-box">
+          <div>
+            <input type="checkbox" id="genre-action" name="genre" value="Action" />
+            <label for="genre-action">Action</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-drama" name="genre" value="Drama" />
+            <label for="genre-drama">Drama</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-comedy" name="genre" value="Comedy" />
+            <label for="genre-comedy">Comedy</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-horror" name="genre" value="Horror" />
+            <label for="genre-horror">Horror</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-romance" name="genre" value="Romance" />
+            <label for="genre-romance">Romance</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-fantasy" name="genre" value="Fantasy" />
+            <label for="genre-fantasy">Fantasy</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-adventure" name="genre" value="Adventure" />
+            <label for="genre-adventure">Adventure</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-thriller" name="genre" value="Thriller" />
+            <label for="genre-thriller">Thriller</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-sci-fi" name="genre" value="Sci-Fi" />
+            <label for="genre-sci-fi">Sci-Fi</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-historical" name="genre" value="Historical" />
+            <label for="genre-historical">Historical</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-mystery" name="genre" value="Mystery" />
+            <label for="genre-mystery">Mystery</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-biography" name="genre" value="Biography" />
+            <label for="genre-biography">Biography</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-dystopian" name="genre" value="Dystopian" />
+            <label for="genre-dystopian">Dystopian</label>
+          </div>
+          <div>
+            <input type="checkbox" id="genre-young-adult" name="genre" value="Young Adult" />
+            <label for="genre-young-adult">Young Adult</label>
+          </div>
+
+          <!-- Add more genres as needed -->
+        </div>
+      </div>
+      <div>
+        <label>År:</label><br />
+        <input id="year" type="text" placeholder="Legg til utgivelsesår" />
+      </div>
+      <div>
+        <label>Regissør:</label><br />
+        <input id="director" type="text" placeholder="" />
+      </div>
+      <div>
+        <label>Vurdering:</label><br />
+        <input id="rating" type="text" placeholder="" />
+      </div>
+      <div>
+        <label>Beskrivelse:</label><br />
+        <textarea id="description" placeholder="Legg til beskrivelse"></textarea>
+      </div>
+      <div class="signUpBox">
+        <button class="btnUpdate" onclick="updateItem()">
+          Lagre Endringer
+        </button>
+      </div>
+      <button class="btnClose" onclick="closePopover()">Close</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-storage-compat.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/logout.js"></script>
+  <script>
+    displayCollection("movies", "index-movie-list", 6);
+    displayCollection("series", "index-series-list", 6);
+    displayCollection("books", "index-book-list", 6);
+  </script>
+</body>
+
 </html>
